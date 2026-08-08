@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.get
@@ -30,49 +31,73 @@ private val sharedClient = HttpClient(CIO)
 @Composable
 fun UiTayUrlImage(
     url: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+     drawable: Int? = null
 ) {
-    val finalUrl = remember(url) { url }
-    var imageBitmap by remember(finalUrl) {
-        mutableStateOf(TayImageCache.get(finalUrl))
-    }
-    var isLoading by remember(finalUrl) {
-        mutableStateOf(imageBitmap == null)
-    }
-    LaunchedEffect(finalUrl) {
-        if (imageBitmap == null) {
-            isLoading = true
-            try {
-                val bitmap = withContext(Dispatchers.IO) {
-                    val response = sharedClient.get(finalUrl)
-                    val bytes = response.readRawBytes()
-                    BitmapFactory.decodeByteArray(bytes, 0, bytes.size)?.asImageBitmap()
+
+    if (url.isNotBlank()) {
+        val finalUrl = remember(url) { url }
+        var imageBitmap by remember(finalUrl) { mutableStateOf(TayImageCache.get(finalUrl)) }
+        var isLoading by remember(finalUrl) { mutableStateOf(imageBitmap == null) }
+
+        LaunchedEffect(finalUrl) {
+            if (imageBitmap == null) {
+                isLoading = true
+                try {
+                    val bitmap = withContext(Dispatchers.IO) {
+                        val response = sharedClient.get(finalUrl)
+                        val bytes = response.readRawBytes()
+                        BitmapFactory.decodeByteArray(bytes, 0, bytes.size)?.asImageBitmap()
+                    }
+                    if (bitmap != null) {
+                        TayImageCache.put(finalUrl, bitmap)
+                        imageBitmap = bitmap
+                    }
+                } catch (e: Exception) {
+                    println("Error: ${e.message}")
+                } finally {
+                    isLoading = false
                 }
-                if (bitmap != null) {
-                    TayImageCache.put(finalUrl, bitmap)
-                    imageBitmap = bitmap
+            }
+        }
+
+        Box(modifier = modifier, contentAlignment = Alignment.Center) {
+            imageBitmap?.let { bitmap ->
+                Image(
+                    bitmap = bitmap,
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            } ?: if (isLoading) {
+                Box(Modifier.fillMaxSize().background(Color.LightGray.copy(alpha = 0.5f)))
+            } else {
+
+                if (drawable != null) {
+                    Image(
+                        painter = painterResource(id = drawable),
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Box(Modifier.fillMaxSize().background(Color.Gray))
                 }
-            } catch (e: Exception) {
-                println("Error: ${e.message}")
-            } finally {
-                isLoading = false
             }
         }
     }
 
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        imageBitmap?.let { bitmap ->
-            Image(
-                bitmap = bitmap,
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-        } ?: if (isLoading) {
-            Box(Modifier.fillMaxSize().background(Color.LightGray.copy(alpha = 0.5f)))
-        } else {
-            Box(Modifier.fillMaxSize().background(Color.Gray))
-        }
+    else if (drawable != null) {
+        Image(
+            painter = painterResource(id = drawable),
+            contentDescription = null,
+            modifier = modifier,
+            contentScale = ContentScale.Crop
+        )
+    }
+
+    else {
+        Box(modifier = modifier.background(Color.Gray))
     }
 }
 

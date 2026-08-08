@@ -4,37 +4,141 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.valu.uitaycompose.utils.tay_blue_700
 import com.valu.uitaycompose.utils.tay_blue_900
+import com.valu.uitaycompose.utils.tay_grey_300
 import com.valu.uitaycompose.utils.tay_grey_400
 import com.valu.uitaycompose.utils.tay_grey_700
+import com.valu.uitaycompose.utils.tay_pink_300
+import com.valu.uitaycompose.utils.tay_pink_400
 import com.valu.uitaycompose.utils.textB16
 
 
 data class UiTayButtonModel (
     var uTHeight : Int = 48,
-    var uTBgColor : Color = tay_blue_700,
-    var uTStrokeColor : Color = tay_blue_700,
-    var uTBgDisableColor : Color = tay_grey_400,
-    var uTStrokeDisableColor : Color = tay_grey_700,
-    var uTBgSelectedColor : Color = tay_blue_900,
-    var uTStrokeSelectedColor : Color = tay_blue_900,
+    var uTBgColor : Color = tay_pink_300,
+    var uTStrokeColor : Color = tay_pink_300,
+    var uTBgDisableColor : Color = tay_grey_300,
+    var uTStrokeDisableColor : Color = tay_grey_300,
+    var uTBgSelectedColor : Color = tay_pink_400,
+    var uTStrokeSelectedColor : Color = tay_pink_400,
     var uTBgSecondaryColor : Color = Color.White,
-    var uTStrokeSecondaryColor : Color = tay_blue_700,
+    var uTStrokeSecondaryColor : Color = tay_pink_300,
     var uTBgSecondaryDisableColor : Color = Color.White,
     var uTStrokeSecondaryDisableColor : Color = tay_grey_400,
     var uTBgSecondarySelectedColor : Color = Color.White,
-    var uTStrokeSecondarySelectedColor : Color = tay_blue_900,
+    var uTStrokeSecondarySelectedColor : Color = tay_pink_400,
     var uTTextColor: Color = Color.White,
     var uTTextColorDisable: Color = Color.White,
     var uTTextColorSelected: Color = Color.White,
-    var uTTextColorSecondary: Color = tay_blue_700,
+    var uTTextColorSecondary: Color = tay_pink_300,
     var uTTextColorDisableSecondary: Color = tay_grey_700,
-    var uTTextColorSelectedSecondary: Color =  tay_blue_900,
+    var uTTextColorSelectedSecondary: Color =  tay_pink_400,
     var uTTextFont : TextStyle = textB16,
     var uTColorIconDefault: Boolean = false,
-    var uTIconStart : Int? = null,
-    var uTIconEnd : Int? = null,
+    var uTIconStart : Int = 0,
+    var uTIconEnd : Int = 0,
     var uTStrokeWith : Int = 1,
-    var uTRadius : Int = 62)
+    var uTRadius : Int = 62){
+
+    fun height(height: Int): UiTayButtonModel = apply {
+        this.uTHeight = height
+    }
+
+    fun bgColor(color: Color): UiTayButtonModel = apply {
+        this.uTBgColor = color
+    }
+
+    fun strokeColor(color: Color): UiTayButtonModel = apply {
+        this.uTStrokeColor = color
+    }
+
+    fun bgDisableColor(color: Color): UiTayButtonModel = apply {
+        this.uTBgDisableColor = color
+    }
+
+    fun strokeDisableColor(color: Color): UiTayButtonModel = apply {
+        this.uTStrokeDisableColor = color
+    }
+
+    fun bgSelectedColor(color: Color): UiTayButtonModel = apply {
+        this.uTBgSelectedColor = color
+    }
+
+    fun strokeSelectedColor(color: Color): UiTayButtonModel = apply {
+        this.uTStrokeSelectedColor = color
+    }
+
+    fun bgSecondaryColor(color: Color): UiTayButtonModel = apply {
+        this.uTBgSecondaryColor = color
+    }
+
+    fun strokeSecondaryColor(color: Color): UiTayButtonModel = apply {
+        this.uTStrokeSecondaryColor = color
+    }
+
+    fun bgSecondaryDisableColor(color: Color): UiTayButtonModel = apply {
+        this.uTBgSecondaryDisableColor = color
+    }
+
+    fun strokeSecondaryDisableColor(color: Color): UiTayButtonModel = apply {
+        this.uTStrokeSecondaryDisableColor = color
+    }
+
+    fun bgSecondarySelectedColor(color: Color): UiTayButtonModel = apply {
+        this.uTBgSecondarySelectedColor = color
+    }
+
+    fun strokeSecondarySelectedColor(color: Color): UiTayButtonModel = apply {
+        this.uTStrokeSecondarySelectedColor = color
+    }
+
+    fun textColor(color: Color): UiTayButtonModel = apply {
+        this.uTTextColor = color
+    }
+
+    fun textColorDisable(color: Color): UiTayButtonModel = apply {
+        this.uTTextColorDisable = color
+    }
+
+    fun textColorSelected(color: Color): UiTayButtonModel = apply {
+        this.uTTextColorSelected = color
+    }
+
+    fun textColorSecondary(color: Color): UiTayButtonModel = apply {
+        this.uTTextColorSecondary = color
+    }
+
+    fun textColorDisableSecondary(color: Color): UiTayButtonModel = apply {
+        this.uTTextColorDisableSecondary = color
+    }
+
+    fun textColorSelectedSecondary(color: Color): UiTayButtonModel = apply {
+        this.uTTextColorSelectedSecondary = color
+    }
+
+    fun textFont(font: TextStyle): UiTayButtonModel = apply {
+        this.uTTextFont = font
+    }
+
+    fun colorIconDefault(isDefault: Boolean): UiTayButtonModel = apply {
+        this.uTColorIconDefault = isDefault
+    }
+
+    fun iconStart(icon: Int): UiTayButtonModel = apply {
+        this.uTIconStart = icon
+    }
+
+    fun iconEnd(icon: Int): UiTayButtonModel = apply {
+        this.uTIconEnd = icon
+    }
+
+    fun strokeWidth(width: Int): UiTayButtonModel = apply {
+        this.uTStrokeWith = width
+    }
+
+    fun radius(radius: Int): UiTayButtonModel = apply {
+        this.uTRadius = radius
+    }
+}
 
 fun Boolean.utBtnState(selected : Boolean = false)=  if (selected) UTStateCButton.UI_BTN_SELECTED else
         if (this)UTStateCButton.UT_BTN_ENABLE else UTStateCButton.UI_BTN_DISABLE

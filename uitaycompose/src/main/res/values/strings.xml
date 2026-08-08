@@ -1,0 +1,9 @@
+<resources>
+    <string name="tay_ui_error_pdf_link">La url es incorrecta</string>
+    <string name="tay_ui_error_app_maps">¡No se detecto servicios requeridos!</string>
+    <string name="ui_tay_maps_store">http://play.google.com/store/apps/details?id=com.google.android.apps.maps</string>
+    <string name="ui_tay_no_maps">No tienes Google Maps instalado</string>
+    <string name="ui_tay_start_navigation">Iniciar navegación con</string>
+    <string name="ui_tay_maps_package">com.google.android.apps.maps</string>
+    <string name="ui_tay_waze_package">com.waze</string>
+</resources>

@@ -2,7 +2,9 @@ package com.valu.uitaycompose.label
 
 import android.view.ViewTreeObserver
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -115,14 +117,17 @@ fun UiTayEditLayout(
             view.viewTreeObserver.removeOnGlobalLayoutListener(listener)
         }
     }
+
     Column(modifier = modifier.fillMaxWidth()) {
         OutlinedTextField(
             value = value,
             onValueChange = {
                 if (it.length <= maxLength) onValueChange(it)
             },
+            // Usamos heightIn para controlar la altura mínima y hacer compacto el campo
             modifier = Modifier
                 .fillMaxWidth()
+                .heightIn(min = 50.dp, max = 56.dp)
                 .onFocusChanged { focusState ->
                     active = focusState.isFocused
                 },
@@ -139,8 +144,7 @@ fun UiTayEditLayout(
                 imeAction = imeAction
             ),
             leadingIcon = startIcon?.let {
-                { Icon(painter = painterResource(id = it), contentDescription = null,
-                    tint = iconColor) }
+                { Icon(painter = painterResource(id = it), contentDescription = null, tint = iconColor) }
             },
             trailingIcon = {
                 if (isPassword) {

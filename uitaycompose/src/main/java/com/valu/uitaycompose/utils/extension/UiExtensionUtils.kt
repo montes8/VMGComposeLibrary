@@ -1,26 +1,38 @@
 package com.valu.uitaycompose.utils.extension
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import android.content.Context
+import android.content.Intent
+import androidx.core.net.toUri
+import com.google.gson.Gson
+import com.valu.uitaycompose.utils.UI_EMPTY
+import kotlinx.serialization.json.Json
+import java.net.NetworkInterface
+import java.util.Collections
 
-@Composable
-fun Modifier.uiTayNoRippleClickable(
-    onClick: () -> Unit
-) = this.then(
-    Modifier.clickable(
-        indication = null,
-        interactionSource = remember { MutableInteractionSource() }) {
-        onClick()
+val uiTayJson = Json {
+    ignoreUnknownKeys = true
+    coerceInputValues = true
+    encodeDefaults = true
+}
+
+fun uiTayGetMobilIPAddress(): String {
+    try {
+        val interfaces = Collections.list(NetworkInterface.getNetworkInterfaces())
+        for (intf in interfaces) {
+            val addrs = Collections.list(intf.inetAddresses)
+            for (addr in addrs) {
+                if (!addr.isLoopbackAddress) {
+                    val sAddr = addr.hostAddress
+                    val isIPv4 = (sAddr?.indexOf(':') ?: -1) < 0
+                    if (isIPv4) return sAddr ?: UI_EMPTY
+                }
+            }
+        }
+    } catch (ex: Exception) {
+        ex.printStackTrace()
     }
-)
-
+    return UI_EMPTY
+}
 
 fun uiTayDriveUrl(originalUrl: String): String {
     if (!originalUrl.contains("drive.google.com")) return originalUrl
@@ -35,17 +47,82 @@ fun uiTayDriveUrl(originalUrl: String): String {
     }
 }
 
-@Composable
-fun Modifier.uiDelayed(
-    delayMillis: Long = 1000L,
-    onAction: () -> Unit
-): Modifier = composed {
-    val scope = rememberCoroutineScope()
-
-    this.clickable {
-        scope.launch {
-            delay(delayMillis)
-            onAction()
+fun Context.getNameSplashCustom(): String {
+    return when (this.uiTayCountryNetwork()) {
+        "AR" -> {
+            "SplashAR"
+        }
+        "MX" -> {
+            "SplashMX"
+        }
+        else -> {
+            "Splash"
         }
     }
+}
+
+fun Context.getNameToolbarCustom(): String {
+    return when (this.uiTayCountryNetwork()) {
+        "AR" -> {
+            "ToolbarAR"
+        }
+        "MX" -> {
+            "ToolbarMX"
+        }
+        else -> {
+            "Toolbar"
+        }
+    }
+}
+
+fun Context.getNameBackgroundCustom(): String {
+    return when (this.uiTayCountryNetwork()) {
+        "AR" -> {
+            "BackgroundAR"
+        }
+        "MX" -> {
+            "BackgroundMX"
+        }
+        else -> {
+            "Background"
+        }
+    }
+}
+
+fun Context.uiTayUrlFacebook(idProfile: String) {
+    if (idProfile.isNotEmpty()) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, "fb://profile/$idProfile".toUri())
+            startActivity(intent)
+        } catch (e: java.lang.Exception) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    "http://www.facebook.com/$idProfile".toUri()
+                )
+            )
+        }
+    } else {
+        uiTayShowToast("Aun no esta configurado")
+    }
+
+}
+
+fun Context.uiTayOpenUrl(url: String) {
+    val intent = Intent(Intent.ACTION_VIEW, url.toUri())
+    this.startActivity(intent)
+}
+
+inline fun <reified T> uiTayDataJson(context: Context, fileName: String): T {
+    val json = context.assets.open(fileName).bufferedReader().use { it.readText() }
+    return uiTayJson.decodeFromString(json)
+}
+
+inline fun <reified T> uiTayJsonToObjet(json: String): T {
+    return uiTayJson.decodeFromString(json)
+}
+
+fun <T> T.uiTayObjetToJson(): String {
+    val jsonData = Gson()
+    return jsonData.toJson(this)
 }

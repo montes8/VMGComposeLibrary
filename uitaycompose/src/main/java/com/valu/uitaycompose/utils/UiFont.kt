@@ -11,9 +11,9 @@ import com.valu.uitaycompose.R
 
 val textB40: TextStyle
     get() = tayTextBold.headlineLarge
-val textB35: TextStyle
-    get() = tayTextBold.headlineMedium
 val textB30: TextStyle
+    get() = tayTextBold.headlineMedium
+val textB28: TextStyle
     get() = tayTextBold.headlineSmall
 val textB25: TextStyle
     get() = tayTextBold.titleLarge
@@ -85,7 +85,7 @@ val textGabbiB40: TextStyle
     get() = tayTextGabbiBold.headlineLarge
 val textGabbiB35: TextStyle
     get() = tayTextGabbiBold.headlineMedium
-val textGabbiB30: TextStyle
+val textGabbiB28: TextStyle
     get() = tayTextGabbiBold.headlineSmall
 val textGabbiB25: TextStyle
     get() = tayTextGabbiBold.titleLarge
@@ -508,7 +508,7 @@ private val tayTextGabbiBold = Typography(
     headlineSmall = TextStyle(
         fontFamily = gabbiFont,
         fontWeight = FontWeight.Bold,
-        fontSize = 30.sp,
+        fontSize = 28.sp,
         color = Color.White
     ),
     titleLarge = TextStyle(

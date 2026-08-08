@@ -28,7 +28,7 @@ data class UiEditLayoutModel (
     var uiIconStart : Int = R.drawable.uic_tay_ic_back,
     var uiIconEnd : Int = R.drawable.uic_tay_ic_menu,
     var uiPaddingHorizontal : Dp = 16.dp,
-    var uiPaddingVertical : Dp = 12.dp,
+    var uiPaddingVertical : Dp = 8.dp,
     var uiIconMarginStar : Dp = 8.dp,
     var uiIconMarginEnd : Dp = 8.dp,
     var uiTextFont : TextStyle = textM16,

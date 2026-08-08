@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -22,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.valu.uitaycompose.R
 import com.valu.uitaycompose.model.UTStyleCButton
 import com.valu.uitaycompose.model.UTStyleIcon
 import com.valu.uitaycompose.model.UiTayButtonModel
@@ -33,34 +33,35 @@ import com.valu.uitaycompose.model.utBtnState
 import com.valu.uitaycompose.utils.UI_TAY_TEXT_DEFAULT
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun UiTayButton(uiTayText : String = UI_TAY_TEXT_DEFAULT,
                 uiTayEnable : Boolean = true,
                 uiTayStyleBtn : UTStyleCButton = UTStyleCButton.UI_TAY_PRIMARY,
-                uiTayStyleIcon : UTStyleIcon = UTStyleIcon.FULL,
-                uiTayBtnModel : UiTayButtonModel = UiTayButtonModel(),
+                uiTayStyleIcon : UTStyleIcon = UTStyleIcon.NONE,
                 paddingDrawable : Dp = 8.dp,
                 colorDefaultIcon : Boolean = false,
+                uiTayBtnModifier : UiTayButtonModel = UiTayButtonModel(),
                 uiTayClick: () -> Unit
 ) {
     var selected by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     Button(modifier = Modifier
-        .height(uiTayBtnModel.uTHeight.dp).fillMaxWidth(),
-        shape = RoundedCornerShape(uiTayBtnModel.uTRadius.dp),
-        border = BorderStroke(uiTayBtnModel.uTStrokeWith.dp,
-            uiTayBtnModel.uiTayStroke(uiTayStyleBtn,uiTayEnable.utBtnState(selected))),
+        .height(uiTayBtnModifier.uTHeight.dp).fillMaxWidth(),
+        shape = RoundedCornerShape(uiTayBtnModifier.uTRadius.dp),
+        border = BorderStroke(uiTayBtnModifier.uTStrokeWith.dp,
+            uiTayBtnModifier.uiTayStroke(uiTayStyleBtn,uiTayEnable.utBtnState(selected))),
         colors = ButtonDefaults.buttonColors(containerColor =
-            uiTayBtnModel.uiTayBackground(uiTayStyleBtn,uiTayEnable.utBtnState(selected)),
+            uiTayBtnModifier.uiTayBackground(uiTayStyleBtn,uiTayEnable.utBtnState(selected)),
             contentColor =
-                uiTayBtnModel.uiTayBackground(uiTayStyleBtn,uiTayEnable.utBtnState(selected)
+                uiTayBtnModifier.uiTayBackground(uiTayStyleBtn,uiTayEnable.utBtnState(selected)
             )),
         onClick = {
             if(uiTayEnable){
                 selected  = true
                 scope.launch {
-                    delay(500)
+                    delay(500.milliseconds)
                     selected = false
                 }
                 uiTayClick()
@@ -72,24 +73,25 @@ fun UiTayButton(uiTayText : String = UI_TAY_TEXT_DEFAULT,
             verticalAlignment = Alignment.CenterVertically) {
             if (uiTayStyleIcon == UTStyleIcon.FULL || uiTayStyleIcon == UTStyleIcon.START){
                 Icon(
-                    painter = painterResource(id = R.drawable.uic_tay_ic_menu),
+                    painter = painterResource(id = uiTayBtnModifier.uTIconStart),
                     contentDescription = null,
-
+                    modifier = Modifier.size(24.dp),
                     tint = if (colorDefaultIcon)Color.Unspecified else
-                        uiTayBtnModel.uiTayTextColor(uiTayStyleBtn,uiTayEnable.utBtnState(selected)
+                        uiTayBtnModifier.uiTayTextColor(uiTayStyleBtn,uiTayEnable.utBtnState(selected)
 
 
                 ))
             }
             Text(text = uiTayText, color =
-                uiTayBtnModel.uiTayTextColor(uiTayStyleBtn,uiTayEnable.utBtnState(selected))
+                uiTayBtnModifier.uiTayTextColor(uiTayStyleBtn,uiTayEnable.utBtnState(selected))
             )
             if (uiTayStyleIcon == UTStyleIcon.FULL || uiTayStyleIcon == UTStyleIcon.END){
                 Icon(
-                    painter = painterResource(id = R.drawable.uic_tay_ic_menu),
+                    painter = painterResource(id = uiTayBtnModifier.uTIconEnd),
                     contentDescription = null,
+                    modifier = Modifier.size(24.dp),
                     tint = if (colorDefaultIcon)Color.Unspecified else
-                        uiTayBtnModel.uiTayTextColor(uiTayStyleBtn,uiTayEnable.utBtnState(selected)
+                        uiTayBtnModifier.uiTayTextColor(uiTayStyleBtn,uiTayEnable.utBtnState(selected)
                     )
                 )
             }

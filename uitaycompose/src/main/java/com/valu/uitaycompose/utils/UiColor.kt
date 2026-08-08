@@ -7,6 +7,10 @@ import androidx.compose.ui.graphics.Color
  todo 200: Ideal para fondos de tarjetas o elementos secundarios.
  todo 900/50: Ideales para textos o fondos de pantalla completa.*/
 
+
+val tay_dialog_transparent = Color(0x00000000)
+
+
 val tay_indigo_50 = Color(0xFFE8EAF6)
 val tay_indigo_100 = Color(0xFFC5CAE9)
 val tay_indigo_200 = Color(0xFF9FA8DA)
