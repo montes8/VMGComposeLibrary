@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.valu.taycomposelibrary"
-        minSdk = 24
+        minSdk = 25
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
