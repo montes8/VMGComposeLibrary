@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">TayLibrary</string>
     <string name="tay_ui_error_pdf_link">La url es incorrecta</string>
     <string name="tay_ui_error_app_maps">¡No se detecto servicios requeridos!</string>
     <string name="ui_tay_maps_store">http://play.google.com/store/apps/details?id=com.google.android.apps.maps</string>

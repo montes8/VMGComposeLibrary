@@ -25,7 +25,6 @@ import com.valu.uitaycompose.utils.tay_pink_600
 import com.valu.uitaycompose.utils.tay_red_50
 import com.valu.uitaycompose.utils.tay_red_600
 import com.valu.uitaycompose.utils.textM12
-import com.valu.uitaycompose.utils.textM14
 
 enum class UITayStyleInfoCompose {
     UI_TAY_INFO, UI_TAY_ERROR

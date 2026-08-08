@@ -2,7 +2,6 @@ package com.valu.uitaycompose.label
 
 import android.view.ViewTreeObserver
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding

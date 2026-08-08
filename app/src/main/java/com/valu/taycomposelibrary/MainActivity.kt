@@ -16,11 +16,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.valu.taycomposelibrary.ui.theme.TayComposeLibraryTheme
 import com.valu.uitaycompose.button.UiTayButton
-import com.valu.uitaycompose.loading.uiShowProgress
+import com.valu.uitaycompose.loading.uiTayShowProgress
 import com.valu.uitaycompose.security.encryption.quantum.QuantumEngine
 import com.valu.uitaycompose.security.encryption.quantum.uiKeyPrivateQuantum
 import com.valu.uitaycompose.security.encryption.quantum.uiKeyPublicQuantum
@@ -30,52 +31,77 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val message = "Este es un mensaje protegido contra computadoras cuánticas"
-        val keyPairBeto = QuantumEngine.uiCreateKeys()
-        val publicaBeto = keyPairBeto.uiKeyPublicQuantum()
-        val privadaBeto = keyPairBeto.uiKeyPrivateQuantum()
-        val iv = uiCreateIv(true)
 
-
-        val textEncrypt =  QuantumEngine.encrypt(
-            data = message,publicKey = publicaBeto,iv=  iv)
-
-        Log.d("tagquatum", textEncrypt.first)
-        Log.d("tagquatum", "\n")
-        val textDesencrypt =  QuantumEngine.decrypt(
-            data = message,privateKey = privadaBeto, packageKey = textEncrypt.second,iv=  iv)
-
-        Log.d("tagquatum", textDesencrypt)
+        // Ejecutamos la prueba de encriptación cuántica al iniciar
+        runQuantumEncryptionTest()
 
         setContent {
             TayComposeLibraryTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { p ->
-                    print(p.toString())
-                    Screençhome()
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    HomeScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
+
+    /**
+     * Prueba el motor de encriptación post-cuántica Kyber + AES-GCM
+     */
+    private fun runQuantumEncryptionTest() {
+        val originalMessage = "Este es un mensaje protegido contra computadoras cuánticas"
+        val keyPair = QuantumEngine.uiCreateKeys()
+        val iv = uiCreateIv(true)
+
+        // 1. Encriptar
+        val encryptedResult = QuantumEngine.encrypt(
+            data = originalMessage,
+            publicKey = keyPair.uiKeyPublicQuantum(),
+            iv = iv
+        )
+        
+        Log.d("QuantumSecurity", "--- INICIO PRUEBA CUÁNTICA ---")
+        Log.d("QuantumSecurity", "Mensaje Original: $originalMessage")
+        Log.d("QuantumSecurity", "Texto Cifrado (Base64): ${encryptedResult.first}")
+        Log.d("QuantumSecurity", "Tamaño del paquete de llave: ${encryptedResult.second.size} bytes")
+
+        // 2. Desencriptar (Usamos el texto cifrado, no el original)
+        val decryptedMessage = QuantumEngine.decrypt(
+            data = encryptedResult.first, 
+            privateKey = keyPair.uiKeyPrivateQuantum(),
+            packageKey = encryptedResult.second,
+            iv = iv
+        )
+
+        Log.d("QuantumSecurity", "Mensaje Desencriptado: $decryptedMessage")
+        Log.d("QuantumSecurity", "--- FIN PRUEBA CUÁNTICA ---")
+    }
 }
 
-
 @Composable
-fun Screençhome(){
-    var showMyModal by remember { mutableStateOf(false) }
+fun HomeScreen(modifier: Modifier = Modifier) {
+    var isLoading by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
-    Column(modifier = Modifier.padding(top=250.dp, start = 16.dp, end = 16.dp)
-        .uiShowProgress(showMyModal),
-        verticalArrangement = Arrangement.spacedBy(36.dp)) {
-        UiTayButton() {
-            showMyModal = true
-            scope.launch {
-                delay(3000)
-                showMyModal = false
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .uiTayShowProgress(isLoading),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        UiTayButton(
+            uiTayText = "Probar Modal de Carga",
+            uiTayClick = {
+                isLoading = true
+                scope.launch {
+                    delay(3000)
+                    isLoading = false
+                }
             }
-        }
+        )
     }
 }

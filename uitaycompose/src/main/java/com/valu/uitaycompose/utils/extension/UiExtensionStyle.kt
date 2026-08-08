@@ -11,7 +11,6 @@ import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.valu.uitaycompose.utils.tay_pink_300
-import com.valu.uitaycompose.utils.tay_pink_400
 import com.valu.uitaycompose.utils.tay_pink_600
 
 fun Modifier.uiTayBgBorder(

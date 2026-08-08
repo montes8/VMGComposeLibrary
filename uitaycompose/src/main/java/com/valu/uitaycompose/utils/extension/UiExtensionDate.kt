@@ -129,7 +129,7 @@ fun uiTayGetListMonthsReverse(range:Int = 3,formatCurrent : String = UI_TAY_FORM
     val calendar = Calendar.getInstance()
     val format = SimpleDateFormat(formatCurrent,locale?: Locale.getDefault())
     val monthsName = mutableListOf<String>()
-    for (i in 0 until range) {
+    repeat(range) {
         val monthName = format.format(calendar.time)
         monthsName.add(monthName)
         calendar.add(Calendar.MONTH, -1)
@@ -142,7 +142,7 @@ fun uiTayGetListMonths(range:Int = 3,formatCurrent : String = UI_TAY_FORMAT_MONT
     val calendar = Calendar.getInstance()
     val format = SimpleDateFormat(formatCurrent, locale?:Locale.getDefault())
     val monthsName = mutableListOf<String>()
-    for (i in 0 until range) {
+    repeat(range) {
         val monthName = format.format(calendar.time)
         monthsName.add(monthName)
         calendar.add(Calendar.MONTH, 1)

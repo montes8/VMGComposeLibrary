@@ -9,7 +9,6 @@ import android.util.DisplayMetrics
 import android.widget.Toast
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusManager
 import com.valu.uitaycompose.R
 import com.valu.uitaycompose.modal.UiTayDialog

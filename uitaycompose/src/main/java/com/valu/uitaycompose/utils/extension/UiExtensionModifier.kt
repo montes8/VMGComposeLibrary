@@ -47,7 +47,6 @@ fun Modifier.uiTayShimmer(
         .clip(RoundedCornerShape(cornerRadius))
         .drawWithContent {
             val width = size.width
-            val height = size.height
             drawRect(color = Color(0xFFE5E5E5))
 
             val offsetX = (width + 8.dp.toPx()) * phase

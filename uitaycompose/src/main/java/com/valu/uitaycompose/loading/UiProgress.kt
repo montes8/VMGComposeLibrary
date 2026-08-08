@@ -117,7 +117,6 @@ fun DualColorFastProgress(
 @Composable
 fun UiTayAnimationProgress(
     idGif: Int = R.drawable.gif_splash,
-    size: Dp = 40.dp,
     backgroundColor: Color = Color.Black.copy(alpha = 0.5f)
 ) {
     Dialog(

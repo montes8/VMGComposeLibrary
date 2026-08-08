@@ -8,13 +8,13 @@ plugins {
 android {
     namespace = "com.valu.taycomposelibrary"
     compileSdk {
-        version = release(36)
+        version = release(37)
     }
 
     defaultConfig {
         applicationId = "com.valu.taycomposelibrary"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -34,6 +34,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
+    //noinspection WrongGradleMethod
     kotlin {
         jvmToolchain(21)
     }
@@ -51,15 +52,14 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("org.bouncycastle:bcprov-jdk18on:1.77")
-    // Librería de utilidades y PKIX (necesaria para manejar pares de llaves)
-    implementation("org.bouncycastle:bcpkix-jdk18on:1.77")
+    implementation(libs.bouncycastle.bcprov)
+    
     implementation(project(":uitaycompose"))
 }
