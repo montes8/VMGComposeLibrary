@@ -12,7 +12,7 @@ appcompat = "1.7.1"
 # Nuevas versiones para la librería
 ktor = "3.1.1"
 biometric = "1.2.0-alpha05"
-bouncycastle = "1.77"
+bouncycastle = "1.79"
 gson = "2.11.0"
 navigationCompose = "2.8.5"
 zxing = "4.3.0"
