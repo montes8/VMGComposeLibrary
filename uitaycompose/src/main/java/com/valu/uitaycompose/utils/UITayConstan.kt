@@ -2,6 +2,7 @@ package com.valu.uitaycompose.utils
 
 const val UI_TAY_TEXT_DEFAULT = "TAY LIBRARY"
 const val UI_EMPTY = ""
+const val UI_TAY_TAG = "UI_TAY_TAG"
 
 
 const val UI_TITLE_BIOMETRIC = "Validacion biometrica"
