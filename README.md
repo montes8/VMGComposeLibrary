@@ -1,4 +1,17 @@
-# VMGComposeLibrary (uitaycompose) 🚀
+# TayComposeLibrary (uitaycompose) 🚀
+
+> [!CAUTION]
+> **PROPIEDAD INTELECTUAL Y TÉRMINOS DE USO**
+>
+> Todos los derechos reservados. Este repositorio es exclusivamente para fines de **exhibición y portafolio personal**. 
+> 
+> **Queda estrictamente prohibida** la copia, modificación, distribución o uso de este código (total o parcial) en proyectos personales o comerciales sin el consentimiento expreso y por escrito del autor. 
+> 
+> **AVISO IMPORTANTE:** Este código contiene códigos internos, marcas de agua digitales y patrones lógicos específicos que detectan que es mi código, incluso si es copiado o modificado parcialmente.
+> 
+> © 2026 Tayler (montes8).
+
+---
 
 Una potente librería de componentes de **Jetpack Compose** y utilidades esenciales para agilizar el desarrollo de aplicaciones Android modernas.
 
@@ -10,29 +23,15 @@ Una potente librería de componentes de **Jetpack Compose** y utilidades esencia
 - **Gestión de Permisos:** Manejo fácil de permisos de cámara y estados de permisos.
 - **Multimedia:** Soporte para GIF y carga de imágenes por URL.
 
-## 📦 Instalación
+## 🛠 Estructura del Proyecto
 
-Para usar esta librería en tu proyecto, puedes utilizar **JitPack**.
+- `animation/`: Utilidades para animaciones fluidas.
+- `button/`: Implementaciones de botones con feedback visual.
+- `security/`: Motores de encriptación y manager biométrico.
+- `utils/extension/`: El corazón de la librería con extensiones para casi todo tipo de dato en Android.
+- `modal/`: Dialogos y vistas de detalle preconfiguradas.
 
-### 1. Agregar el repositorio en `settings.gradle.kts`
-
-```kotlin
-dependencyResolutionManagement {
-    repositories {
-        maven { url = uri("https://jitpack.io") }
-    }
-}
-```
-
-### 2. Agregar la dependencia en `build.gradle.kts`
-
-```kotlin
-dependencies {
-    implementation("com.github.montes8:VMGComposeLibrary:1.0.0")
-}
-```
-
-## 🚀 Uso Rápido
+## 🚀 Uso Rápido (Solo referencia interna)
 
 ### Botón Personalizado (`UiTayButton`)
 
@@ -41,7 +40,7 @@ UiTayButton(
     uiTayText = "Enviar Datos",
     uiTayStyleBtn = UTStyleCButton.UI_TAY_PRIMARY,
     uiTayClick = { 
-        // Tu lógica aquí
+        // Lógica interna
     }
 )
 ```
@@ -53,45 +52,10 @@ val biometricManager = UiTayBiometricManager(
     activity = context as AppCompatActivity,
     alias = "mi_llave_segura",
     onResult = { result ->
-        when (result) {
-            is UiAuthResult.Success -> { /* Éxito */ }
-            is UiAuthResult.Error -> { /* Error */ }
-            is UiAuthResult.ConfigChanged -> { /* Cambio en huellas */ }
-            else -> {}
-        }
+        // Manejo de resultados
     }
 )
-
-biometricManager.uiTayShowAuthentication()
 ```
-
-### Utilidades de Fecha (Extensiones)
-
-```kotlin
-val fechaActual = Date().uiTayFormat("dd/MM/yyyy")
-val esHoy = Date().uiTayIsToday()
-```
-
-### Encriptación AES
-
-```kotlin
-val encrypted = "Texto Secreto".uiTayEncryptAES(key = "clave_16_chars")
-val decrypted = encrypted.uiTayDecryptAES(key = "clave_16_chars")
-```
-
-## 🛠 Estructura del Proyecto
-
-- `animation/`: Utilidades para animaciones fluidas.
-- `button/`: Implementaciones de botones con feedback visual.
-- `security/`: Motores de encriptación y manager biométrico.
-- `utils/extension/`: El corazón de la librería con extensiones para casi todo tipo de dato en Android.
-- `modal/`: Dialogos y vistas de detalle preconfiguradas.
-
-## 📄 Licencia y Uso
-
-**Todos los derechos reservados.**
-
-Este repositorio es exclusivamente para fines de **exhibición y portafolio personal**. No se otorga permiso para el uso, copia, modificación o distribución de este código, ya sea de forma total o parcial, en proyectos personales o comerciales sin el consentimiento expreso del autor.
 
 ---
 Hecho con ❤️ por [montes8](https://github.com/montes8)

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 Tayler (montes8). Todos los derechos reservados.
+ * Este código es propiedad exclusiva de su autor. Queda prohibida su 
+ * copia, distribución o uso sin autorización previa.
+ */
 package com.valu.uitaycompose.utils
 
 const val UI_TAY_TEXT_DEFAULT = "TAY LIBRARY"
@@ -36,4 +41,3 @@ const val TYPE_CONSULT = "CONSULTA"
 const val TAY_LOG  = "TAY_LOG"
 const val ERROR_QR_IMG = "No se encontró ningún QR en la imagen tras intentar todos los formatos"
 const val ERROR_TRY_ORIENTATION = "Exception when trying to orient image"
-

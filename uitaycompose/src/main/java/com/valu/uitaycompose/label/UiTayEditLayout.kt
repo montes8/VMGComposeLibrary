@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2026 montes8. Todos los derechos reservados.
+ * Este archivo es parte de VMGComposeLibrary y no puede ser copiado
+ * ni distribuido sin permiso.
+ */
 package com.valu.uitaycompose.label
 
 import android.view.ViewTreeObserver

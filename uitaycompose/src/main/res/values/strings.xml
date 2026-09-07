@@ -1,3 +1,8 @@
+<!--
+  ~ Copyright (c) 2026 Tayler (montes8). Todos los derechos reservados.
+  ~ Este código es propiedad exclusiva de su autor. Queda prohibida su
+  ~ copia, distribución o uso sin autorización previa.
+  -->
 <resources>
     <string name="app_name">TayLibrary</string>
     <string name="tay_ui_error_pdf_link">La url es incorrecta</string>

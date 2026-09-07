@@ -1,3 +1,8 @@
+<!--
+  ~ Copyright (c) 2026 Tayler (montes8). Todos los derechos reservados.
+  ~ Este código es propiedad exclusiva de su autor. Queda prohibida su
+  ~ copia, distribución o uso sin autorización previa.
+  -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android" android:autoMirrored="true" android:height="24dp" android:tint="#FFFFFF" android:viewportHeight="24" android:viewportWidth="24" android:width="24dp">
       
     <path android:fillColor="@android:color/white" android:pathData="M11.67,3.87L9.9,2.1 0,12l9.9,9.9 1.77,-1.77L3.54,12z"/>

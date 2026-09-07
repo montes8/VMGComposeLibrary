@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Tayler (montes8). Todos los derechos reservados.
+  ~ Este código es propiedad exclusiva de su autor. Queda prohibida su
+  ~ copia, distribución o uso sin autorización previa.
+  -->
 <vector android:height="24dp" android:tint="#E91E63"
     android:viewportHeight="24" android:viewportWidth="24"
     android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
