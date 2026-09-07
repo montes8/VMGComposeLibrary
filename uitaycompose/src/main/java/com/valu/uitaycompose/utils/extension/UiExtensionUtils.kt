@@ -47,7 +47,7 @@ fun uiTayDriveUrl(originalUrl: String): String {
     }
 }
 
-fun Context.getNameSplashCustom(): String {
+fun Context.uiTayNameSplashCustom(): String {
     return when (this.uiTayCountryNetwork()) {
         "AR" -> {
             "SplashAR"
@@ -61,7 +61,7 @@ fun Context.getNameSplashCustom(): String {
     }
 }
 
-fun Context.getNameToolbarCustom(): String {
+fun Context.uiTayNameToolbarCustom(): String {
     return when (this.uiTayCountryNetwork()) {
         "AR" -> {
             "ToolbarAR"
@@ -75,7 +75,7 @@ fun Context.getNameToolbarCustom(): String {
     }
 }
 
-fun Context.getNameBackgroundCustom(): String {
+fun Context.uiTayNameBackgroundCustom(): String {
     return when (this.uiTayCountryNetwork()) {
         "AR" -> {
             "BackgroundAR"

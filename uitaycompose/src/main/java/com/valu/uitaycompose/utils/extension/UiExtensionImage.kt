@@ -312,7 +312,7 @@ fun String.uiTayBase64toBitmap(): Bitmap? {
     return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
 }
 
-fun Bitmap.bitmapToBase64(quality: Int = 100): String? {
+fun Bitmap.uiTayBitmapToBase64(quality: Int = 100): String? {
     return try {
         ByteArrayOutputStream().use { stream ->
             this.compress(Bitmap.CompressFormat.JPEG, quality, stream)
@@ -326,7 +326,7 @@ fun Bitmap.bitmapToBase64(quality: Int = 100): String? {
 }
 
 @Composable
-fun ShowRoundImage(bitmap: Bitmap,size: Dp = 100.dp) {
+fun UiTayShowRoundImage(bitmap: Bitmap,size: Dp = 100.dp) {
     Image(
         bitmap = bitmap.asImageBitmap(),
         contentDescription = null,
@@ -334,24 +334,4 @@ fun ShowRoundImage(bitmap: Bitmap,size: Dp = 100.dp) {
             .size(size)
             .clip(CircleShape)
     )
-}
-
-fun Bitmap.converterCircle(): Bitmap {
-    val size: Int = min(this.width, this.height)
-    val bitmap = ThumbnailUtils.extractThumbnail(this, size, size)
-    val output = createBitmap(bitmap.width, bitmap.height)
-    val canvas = Canvas(output)
-    val color = -0x10000
-    val paint = Paint()
-    val rect = Rect(0, 0, bitmap.width, bitmap.height)
-    val rectF = RectF(rect)
-    paint.isAntiAlias = true
-    paint.isDither = true
-    paint.isFilterBitmap = true
-    canvas.drawARGB(0, 0, 0, 0)
-    paint.color = color
-    canvas.drawOval(rectF, paint)
-    paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-    canvas.drawBitmap(bitmap, rect, rect, paint)
-    return output
 }

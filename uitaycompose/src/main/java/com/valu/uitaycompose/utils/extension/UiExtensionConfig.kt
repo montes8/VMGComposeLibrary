@@ -19,7 +19,7 @@ import com.valu.uitaycompose.utils.COUNTRY_DEFAULT
 import com.valu.uitaycompose.utils.UI_EMPTY
 import java.io.File
 
-fun Context.changeIcon(activeAliasName: String, oldAliasName: String) {
+fun Context. uiTaychangeIcon(activeAliasName: String, oldAliasName: String) {
     try {
         val pm = this.packageManager
         val pkg = this.packageName

@@ -7,13 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
 
 @Composable
-fun isTablet(): Boolean {
+fun uiTayIsTablet(): Boolean {
     val configuration = LocalConfiguration.current
     return configuration.smallestScreenWidthDp >= 600
 }
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun isKeyboardVisible(): Boolean {
+fun  uiTayIsKeyboardVisible(): Boolean {
     return WindowInsets.isImeVisible
 }

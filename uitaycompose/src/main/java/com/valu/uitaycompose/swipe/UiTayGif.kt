@@ -1,5 +1,6 @@
 package com.valu.uitaycompose.swipe
 
+import android.annotation.SuppressLint
 import android.graphics.ImageDecoder
 import android.graphics.drawable.AnimatedImageDrawable
 import android.graphics.drawable.Drawable
@@ -30,7 +31,7 @@ fun UiTayGif(
     width: Dp? = null,
     height: Dp? = null,
     backgroundColor: Color = Color.Transparent,
-    modifier: Modifier = Modifier
+    @SuppressLint("ModifierParameter") modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     var drawable by remember { mutableStateOf<Drawable?>(null) }
@@ -52,9 +53,9 @@ fun UiTayGif(
     }
 
     val sizeModifier = if (width != null && height != null) {
-        Modifier.size(width, height)
+        modifier.size(width, height)
     } else {
-        Modifier.fillMaxSize()
+        modifier.fillMaxSize()
     }
 
     Box(

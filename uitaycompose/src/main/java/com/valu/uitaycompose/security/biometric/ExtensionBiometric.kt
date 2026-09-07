@@ -1,6 +1,5 @@
 package com.valu.uitaycompose.security.biometric
 
-import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import java.security.KeyStore

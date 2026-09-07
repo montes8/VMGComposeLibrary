@@ -20,7 +20,7 @@ import com.valu.uitaycompose.utils.UI_TITLE_BIOMETRIC
      }
  } */
 
-class UiBiometricManager(
+class UiTayBiometricManager(
     private val activity: AppCompatActivity,
     private val alias: String,
     private val onResult: (UiAuthResult) -> Unit
@@ -52,7 +52,7 @@ class UiBiometricManager(
         }
     )
 
-    fun showAuthenticationSure(
+    fun uiTayShowAuthenticationSure(
         title: String = UI_TITLE_BIOMETRIC,
         subTitle: String = UI_SUB_TITLE_BIOMETRIC,
         btnCancel: String = UI_CANCEL_BIOMETRIC
@@ -73,7 +73,7 @@ class UiBiometricManager(
     }
 
 
-    fun showAuthentication(
+    fun uiTayShowAuthentication(
         title: String = UI_TITLE_BIOMETRIC,
         subTitle: String = UI_SUB_TITLE_BIOMETRIC,
         btnCancel: String = UI_CANCEL_BIOMETRIC

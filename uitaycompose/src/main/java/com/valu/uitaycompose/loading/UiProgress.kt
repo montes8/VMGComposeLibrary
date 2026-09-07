@@ -31,13 +31,13 @@ fun Modifier.uiTayShowProgress(
     show: Boolean
 ): Modifier = composed {
     if (show) {
-        UiProgress()
+        UiTayProgress()
     }
     this
 }
 
 @Composable
-fun UiProgress(
+fun UiTayProgress(
     duration: Int = 600,
     line: Dp = 4.dp,
     size: Dp = 40.dp,
@@ -59,7 +59,7 @@ fun UiProgress(
                 .background(backgroundColor),
             contentAlignment = Alignment.Center
         ) {
-            DualColorFastProgress(
+            UiTayDualColorFastProgress(
                 speedMillis = duration,
                 color1 = colorProgress,
                 color2 = bgProgress,
@@ -72,7 +72,7 @@ fun UiProgress(
 
 
 @Composable
-fun DualColorFastProgress(
+fun UiTayDualColorFastProgress(
     speedMillis: Int,
     color1: Color ,
     color2: Color ,

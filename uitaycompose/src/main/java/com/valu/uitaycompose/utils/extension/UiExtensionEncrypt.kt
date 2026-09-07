@@ -7,12 +7,12 @@ import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 
-fun validateNewFinger(keyName:String):Pair<Boolean, Cipher?>{
+fun  uiTayValidateNewFinger(keyName:String):Pair<Boolean, Cipher?>{
     var cipher : Cipher? = null
     var isValid = true
     try{
-        cipher = getCipher()
-        val secretKey = getSecretKey(keyName)
+        cipher = uiTayGetCipher()
+        val secretKey = uiTayGetSecretKey(keyName)
         cipher.init(Cipher.ENCRYPT_MODE, secretKey)
     }catch (e: Exception){
         e.printStackTrace()
@@ -21,7 +21,7 @@ fun validateNewFinger(keyName:String):Pair<Boolean, Cipher?>{
     return Pair(isValid,cipher)
 }
 
-fun generateSecretKey(keyName:String) {
+fun  uiTayGenerateSecretKey(keyName:String) {
     val keyGenerator = KeyGenerator.getInstance(
         KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore")
     keyGenerator.init(
@@ -35,13 +35,13 @@ fun generateSecretKey(keyName:String) {
     keyGenerator.generateKey()
 }
 
-fun getSecretKey(keyName:String): SecretKey {
+fun  uiTayGetSecretKey(keyName:String): SecretKey {
     val keyStore = KeyStore.getInstance("AndroidKeyStore")
     keyStore.load(null)
     return keyStore.getKey(keyName, null) as SecretKey
 }
 
-fun getCipher(): Cipher {
+fun uiTayGetCipher(): Cipher {
     return Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/"
             + KeyProperties.BLOCK_MODE_CBC + "/"
             + KeyProperties.ENCRYPTION_PADDING_PKCS7)

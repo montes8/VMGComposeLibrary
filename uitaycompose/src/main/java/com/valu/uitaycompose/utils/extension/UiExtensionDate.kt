@@ -163,7 +163,7 @@ fun String.uiTayFormatTwelveHour():String{
 }
 
 
-fun millisecondToDate(t: Long,locale: Locale? = null): String {
+fun  uiTayMillisecondToDate(t: Long,locale: Locale? = null): String {
     var i = t
     i /= 1000 /*from   ww w .  j  a v  a  2  s .co  m*/
     var minute = i / 60
