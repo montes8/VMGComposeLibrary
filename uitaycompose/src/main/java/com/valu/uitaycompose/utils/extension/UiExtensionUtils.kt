@@ -7,8 +7,11 @@ package com.valu.uitaycompose.utils.extension
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import androidx.core.net.toUri
 import com.google.gson.Gson
+import com.valu.uitaycompose.R
 import com.valu.uitaycompose.utils.UI_EMPTY
 import kotlinx.serialization.json.Json
 import java.net.NetworkInterface
@@ -130,4 +133,74 @@ inline fun <reified T> uiTayJsonToObjet(json: String): T {
 fun <T> T.uiTayObjetToJson(): String {
     val jsonData = Gson()
     return jsonData.toJson(this)
+}
+
+fun Context.uiTayUrlInstagram(username: String) {
+    if (username.isNotEmpty()) {
+        val cleanUsername = username.removePrefix("@")
+        try {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                "http://instagram.com/_u/$cleanUsername".toUri()
+            ).apply {
+                setPackage("com.instagram.android")
+            }
+            startActivity(intent)
+        } catch (e: Exception) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    "https://instagram.com/$cleanUsername".toUri()
+                )
+            )
+        }
+    } else {
+        uiTayShowToast("Aun no esta configurado")
+    }
+}
+fun Context.uiTayUrlTikTok(username: String) {
+    if (username.isNotEmpty()) {
+        val cleanUsername = if (username.startsWith("@")) username else "@$username"
+        try {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                "snssdk1128://user/profile/$cleanUsername".toUri()
+            ).apply {
+                setPackage("com.zhiliaoapp.musically")
+            }
+            startActivity(intent)
+        } catch (e: Exception) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    "https://www.tiktok.com/$cleanUsername".toUri()
+                )
+            )
+        }
+    } else {
+        uiTayShowToast("Aun no esta configurado")
+    }
+}
+
+fun Context.uiTayOpenEmail(
+    email: String = UI_EMPTY,
+    subject: String = UI_EMPTY,
+    body: String = UI_EMPTY
+) {
+    try {
+        val uri = "mailto:$email?subject=${Uri.encode(subject)}&body=${Uri.encode(body)}".toUri()
+        val intent = Intent(Intent.ACTION_SENDTO, uri).apply {
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, body)
+        }
+        startActivity(intent)
+    } catch (_: Exception) {
+        this.uiTayShowToast(R.string.error_not_install)
+    }
+}
+
+fun String.uiLog(debug : Boolean = false,tag: String = "UI_TAY_LOG") {
+    if (debug) {
+        Log.d(tag, "---------------------------------\n $this \n---------------------------------\n")
+    }
 }

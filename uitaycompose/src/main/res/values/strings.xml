@@ -12,4 +12,5 @@
     <string name="ui_tay_start_navigation">Iniciar navegación con</string>
     <string name="ui_tay_maps_package">com.google.android.apps.maps</string>
     <string name="ui_tay_waze_package">com.waze</string>
+    <string name="error_not_install">Aplicación no instalada</string>
 </resources>

@@ -250,10 +250,52 @@ fun Context.uiTayIsAppTampered(expectedHash: String): Boolean {
 }
 
 
+fun uiTayIsEmulator(additionalKeywords: Array<String> = emptyArray()): Boolean {
+    val buildInfo = listOf(
+        Build.FINGERPRINT,
+        Build.MODEL,
+        Build.BRAND,
+        Build.DEVICE,
+        Build.PRODUCT,
+        Build.HARDWARE,
+        Build.MANUFACTURER,
+        Build.BOARD
+    ).joinToString(separator = " ") { it.lowercase() }
+
+    val defaultKeywords = setOf(
+        "generic",
+        "unknown",
+        "google_sdk",
+        "emulator",
+        "android sdk built for x86",
+        "sdk_google",
+        "sdk_x86",
+        "vbox86p",
+        "vbox86",
+        "simulator",
+        "goldfish",
+        "ranchu",
+        "sdk_gphone",
+        "nox",
+        "bluestacks",
+        "ttvm",
+        "genymotion"
+    )
+    val allKeywords = defaultKeywords + additionalKeywords.map { it.lowercase() }
+    val matchesKeyword = allKeywords.any { buildInfo.contains(it) }
+    val matchesSpecificRules = (Build.BRAND.lowercase().startsWith("google") && Build.MODEL.lowercase().contains("sdk")) ||
+            Build.HARDWARE.lowercase().contains("goldfish") ||
+            Build.HARDWARE.lowercase().contains("ranchu")
+    return matchesKeyword || matchesSpecificRules
+}
+
 private fun getSystemProperty(key: String): String? {
     return try {
         val process = Runtime.getRuntime().exec(arrayOf("/system/bin/getprop", key))
         val reader = java.io.BufferedReader(java.io.InputStreamReader(process.inputStream))
         reader.readLine()
-    } catch (e: Exception) { null }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
 }

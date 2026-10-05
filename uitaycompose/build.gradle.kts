@@ -67,7 +67,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.github.montes8"
             artifactId = "uitaycompose"
-            version = "1.0.0"
+            version = "1.0.1"
             
             afterEvaluate {
                 from(components["release"])
